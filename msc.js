@@ -71,7 +71,7 @@ instance.prototype.config_fields = function () {
 				id: 'host',
 				label: 'Target IP',
 				width: 6,
-				default: '192.168.2.60'
+				default: '192.168.2.60',
 				regex: self.REGEX_IP
 			}
 		]
@@ -112,7 +112,7 @@ instance.prototype.actions = function (system) {
 	var actions = {
 		'route': {
 			label: 'Route x > y',
-			options: [ {
+			options: [{
 				type: 'dropdown',
 				label: 'Input',
 				id: 'input',
@@ -124,6 +124,24 @@ instance.prototype.actions = function (system) {
 				id: 'output',
 				default: '1',
 				choices: self.CHOICES_INOUT
+			}]
+		},
+		'preset_recall': {
+			label: 'Recall preset',
+			options: [ {
+				type: 'textinput',
+				label: 'preset number',
+				id: 'presetID',
+				default: '1'
+			}]
+		},
+		'preset_save': {
+			label: 'Save preset',
+			options: [ {
+				type: 'textinput',
+				label: 'preset number',
+				id: 'presetID',
+				default: '1'
 			} ]
 		}
 	};
@@ -132,25 +150,32 @@ instance.prototype.actions = function (system) {
 
 
 instance.prototype.action = function (action) {
-		var self = this;
-		var id = action.action;
-		var opt = action.options;
-		var cmd;
+	var self = this;
+	var id = action.action;
+	var opt = action.options;
+	var cmd;
 
-		switch (id) {
+	switch (id) {
 
-			case 'route':
-				cmd = `X${opt.input},${opt.output}`;
+		case 'route':
+			cmd = `X${opt.input},${opt.output}`;
 			break
 
-		}
+		case 'preset_recall':
+			cmd = `P${opt.preset}<CR>`;
+			break
 
-		if (cmd !== undefined) {
-			if (self.tcp !== undefined) {
-				debug('sending ', cmd, "to", self.tcp.host);
-				self.tcp.send(cmd);
-			}
+		case 'preset_save':
+			cmd = `W${opt.preset}<CR>`;
+			break
+	}
+
+	if (cmd !== undefined) {
+		if (self.tcp !== undefined) {
+			debug('sending ', cmd, "to", self.tcp.host);
+			self.tcp.send(cmd);
 		}
+	}
 };
 
 instance_skel.extendedBy(instance);
