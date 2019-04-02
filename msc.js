@@ -158,15 +158,17 @@ instance.prototype.action = function (action) {
 	switch (id) {
 
 		case 'route':
-			cmd = `X ${opt.input},${opt.output}<CR>`;
+			cmd = `x${opt.input},${opt.output}\r`;
+			console.log(cmd);
 			break
 
 		case 'preset_recall':
-			cmd = `P ${opt.preset}<CR>`;
+			cmd = `p${opt.preset}\r`;
+			console.log(cmd);
 			break
 
 		case 'preset_save':
-			cmd = `W ${opt.preset}<CR>`;
+			cmd = `w${opt.preset}\r`;
 			break
 	}
 
