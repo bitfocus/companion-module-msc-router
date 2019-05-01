@@ -1,6 +1,6 @@
 {
 	"name": "msc-router",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"api_version": "1.0.0",
 	"keywords": [
 		"Protocol",
@@ -8,7 +8,7 @@
 		],
 	"manufacturer": "MSC",
 	"product": "Router",
-	"shortname": "MSC",
+	"shortname": "MSC Router",
 	"description": "MSC plugin for Companion",
 	"main": "msc.js",
 	"scripts": {

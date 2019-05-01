@@ -132,7 +132,8 @@ instance.prototype.actions = function (system) {
 				type: 'textinput',
 				label: 'preset number',
 				id: 'presetID',
-				default: '1'
+				default: '1',
+				regex: self.REGEX_NUMBER
 			}]
 		},
 		'preset_save': {
@@ -141,7 +142,8 @@ instance.prototype.actions = function (system) {
 				type: 'textinput',
 				label: 'preset number',
 				id: 'presetID',
-				default: '1'
+				default: '1',
+				regex: self.REGEX_NUMBER
 			} ]
 		}
 	};
@@ -158,17 +160,17 @@ instance.prototype.action = function (action) {
 	switch (id) {
 
 		case 'route':
-			cmd = `x${opt.input},${opt.output}\r`;
+			cmd = `x${opt.output},${opt.input}\r`;
 			console.log(cmd);
 			break
 
 		case 'preset_recall':
-			cmd = `p${opt.preset}\r`;
+			cmd = `p${opt.presetID}\r`;
 			console.log(cmd);
 			break
 
 		case 'preset_save':
-			cmd = `w${opt.preset}\r`;
+			cmd = `w${opt.presetID}\r`;
 			break
 	}
 
